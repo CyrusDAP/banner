@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Banner Slide</title>
+  <style>
+    body, html {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      overflow: hidden; /* Menghilangkan scroll bar pada layar penuh */
+    }
+
+    #slideshow-container {
+      position: relative;
+      width: 100%;
+      height: 100vh; /* Tinggi container memenuhi seluruh layar */
+      overflow: hidden;
+    }
+
+    .slides {
+      display: flex;
+      transition: transform 0.5s ease;
+      height: 100%;
+    }
+
+    .slide {
+      flex: 0 0 100%;
+    }
+
+    .slide img {
+      width: 100%;
+      height: 100%; /* Tinggi gambar memenuhi seluruh container */
+      object-fit: cover; /* Mengatur gambar agar tetap proporsional */
+    }
+
+    /* Tambahkan gaya untuk konten yang ingin ditempatkan di tengah */
+    .centered-content {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+      background-image: url("bg1.png");
+      background-size: cover; /* Untuk mengatur gambar agar tetap proporsional dan memenuhi seluruh latar belakang */
+      background-position: center; /* Agar gambar tetap terpusat di latar belakang */
+      background-repeat: no-repeat; /* Menghindari gambar latar belakang diulang */
+      background-position: top center;
+}
+
+    /* Gaya untuk h1 dan h2 */
+    h1, h2 {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin: 0;
+      padding: 10px 0;
+    }
+    h1 {
+  font-size: 36px;
+  font-family: "Caveat", cursive;
+  font-style: italic;
+  text-align: center; /* Mengatur h1 menjadi terpusat secara horizontal */
+}
+
+
+ /* Gaya untuk h2 */
+h2 {
+  font-size: 30px;
+  font-family: comic sans-serif;
+  text-align: center; /* Mengatur teks menjadi terpusat secara horizontal */
+  margin: 10px 0; /* Memberi sedikit jarak antara h2 dengan elemen sekitarnya */
+}
+
+
+    #countdown {
+      font-family: Arial sans-serif;
+      text-align: center;
+      font-size: 24px;
+      position: relative;
+      margin-right: 30px ;
+    }
+    #countdown, web-component-embed {
+  margin: 10px 0;
+    }
+ 
+  </style>
+</head>
+<body>
+  <div id="slideshow-container">
+    <div class="slides">
+      <div class="slide">
+        <!-- Tempatkan header 1 dan header 2 dalam elemen dengan kelas .centered-content -->
+        <div class="centered-content">
+          <h1>GOLPUT BUKAN SOLUSI AYO KE TPS !!!</h1> 
+          <br>
+          <div id="countdown"></div> 
+          <web-component-embed id="pW4Dyj" app_slug="countdown-timer"></web-component-embed>
+          <script src="https://app.powr.io/assets/webcomponent.js"></script> <br>
+          <br>
+          <h2>SUKU BADAN KESATUAN BANGSA DAN POLITIK <br> KOTA JAKARTA UTARA </h3>
+        </div>
+      </div>
+      <div class="slide"><img src="Slide1.png" alt="Slide 1"></div>
+      <div class="slide"><img src="Slide2.png" alt="Slide 2"></div>
+      <div class="slide"><img src="Slide3.png" alt="Slide 3"></div>
+    </div>
+  </div>
+
+  <script>
+    const slideContainer = document.querySelector(".slides");
+    const slides = document.querySelectorAll(".slide");
+    let currentSlide = 0;
+    let slideInterval;
+
+    function moveSlides(direction) {
+      const slideWidth = slides[0].clientWidth;
+      if (direction === "left") {
+        currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+        slideContainer.style.transform = `translateX(-${currentSlide * slideWidth}px)`;
+      } else if (direction === "right") {
+        currentSlide = (currentSlide + 1) % slides.length;
+        slideContainer.style.transform = `translateX(-${currentSlide * slideWidth}px)`;
+      }
+    }
+
+    function startSlideShow() {
+      slideInterval = setInterval(() => {
+        moveSlides("right");
+      }, 60000); // 5 seconds
+    }
+
+    function stopSlideShow() {
+      clearInterval(slideInterval);
+    }
+
+    // Start the slideshow when the page loads
+    document.addEventListener("DOMContentLoaded", function () {
+      startSlideShow();
+    });
+  </script>
+</body>
+</html>
